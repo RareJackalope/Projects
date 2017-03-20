@@ -9,7 +9,7 @@ public class FibToNPlaces {
 	 */
 	public static void main(String[] args) 
 	{
-		System.out.println("Generate the fibonacci sequence to how many places? (0 to 1000)");
+		System.out.println("Generate the fibonacci sequence to how many places? (0 to 50)");
 		Scanner scanner = new Scanner(System.in);
 		int numberOfPlaces = 0;
 		boolean invalidInput = true;
@@ -25,13 +25,13 @@ public class FibToNPlaces {
 			}
 			catch(InputMismatchException exc)
 			{
-				System.out.println("\nPlease enter a number between 0 and 1000");
+				System.out.println("\nPlease enter a number between 0 and 50");
 				scanner = new Scanner(System.in);
 			}
 			
-			if((numberOfPlaces < 0) || (numberOfPlaces > 1000) && !invalidInput)
+			if((numberOfPlaces < 0) || (numberOfPlaces > 50) && !invalidInput)
 			{
-				System.out.println("\nPlease enter a number between 0 and 1000");
+				System.out.println("\nPlease enter a number between 0 and 50");
 				scanner = new Scanner(System.in);
 				invalidInput = true;
 			}
@@ -43,6 +43,9 @@ public class FibToNPlaces {
 		}
 	}
 	
+	/*
+	 * Fn = Fn-1 + Fn-2
+	 */
 	public static long generateFibonacci(int number)
 	{
 		if(number == 1 || number == 2)
