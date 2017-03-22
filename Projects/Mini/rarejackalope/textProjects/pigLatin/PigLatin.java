@@ -1,5 +1,11 @@
 package rarejackalope.textProjects.pigLatin;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+
 public class PigLatin 
 {
 	
@@ -10,18 +16,58 @@ public class PigLatin
 	 */
 	public static void main(String[] args) 
 	{
-		System.out.println(PigLatinize("cabbage"));
+		
+		List<String> tokenList = parseStringForTokens(getStringToConvert());
+		System.out.println(pigLatinize(tokenList));
 	}
 	
-	public static String PigLatinize(String originalString)
-	{
-		String pigLatinString = "";
-		char firstLetter = originalString.charAt(0);
-		originalString = originalString.substring(1);
+	private static String pigLatinize(List<String> tokenList) 
+	{	
+		String pigLatinText = "";
+		String temp;
+		for(int i = 0; i < tokenList.size(); i++)
+		{
+			temp = tokenList.get(i);
+			temp += temp.charAt(0);
+			temp = temp.substring(1);
+			temp += "ay";
+			pigLatinText += temp + " ";
+		}
 		
-		originalString += firstLetter;
-		originalString += "ay";
-		pigLatinString = originalString;
-		return pigLatinString;
+		return pigLatinText;
+	}
+
+	private static List<String> parseStringForTokens(String stringToConvert) {
+		List<String> tokenList = new ArrayList<String>();
+		tokenList = Arrays.asList(stringToConvert.split("\\s"));
+		return tokenList;
+	}
+
+	private static String getStringToConvert() {
+		System.out.println("Enter some text to pig latinize.");
+		Scanner scanner = new Scanner(System.in);
+		return validateInput(scanner);
+		
+	}
+
+	private static String validateInput(Scanner scanner) 
+	{
+		boolean invalidInput = true;
+		String userInput = "";
+		while(invalidInput)
+		{
+			try
+			{
+				userInput = scanner.nextLine();
+				invalidInput = false;
+			}
+			catch(NoSuchElementException exc)
+			{
+				System.out.println("Enter some text to pig latinize");
+				scanner = new Scanner(System.in);
+			}
+		}
+		
+		return userInput;
 	}
 }
