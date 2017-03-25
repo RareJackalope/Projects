@@ -8,19 +8,19 @@
 <?import javafx.scene.layout.HBox?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="rarejackalope.gui.textEditor.TextEditorController">
 
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
           <Menu text="File">
-              <MenuItem text="Close" />
-          </Menu>
-          <Menu text="Edit">
-              <MenuItem text="Delete" />
+          	  <MenuItem text="Load" onAction="#onLoad"/>
+          	  <MenuItem text="Save" onAction="#onSave"/>
+              <MenuItem text="Close" onAction="#onClose"/>
           </Menu>
           <Menu text="Help">
-              <MenuItem text="About" />
+              <MenuItem text="About" onAction="#onAbout"/>
           </Menu>
         </menus>
       </MenuBar>
@@ -29,7 +29,8 @@
    <bottom>
       <HBox prefHeight="60.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
    </bottom>
+   
    <center>
-      <TextArea prefHeight="313.0" prefWidth="602.0" BorderPane.alignment="CENTER" />
+      <TextArea fx:id="areaText" prefHeight="313.0" prefWidth="602.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
