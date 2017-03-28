@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import rarejackalope.inventory.model.Inventory;
 import rarejackalope.inventory.model.Product;
 import rarejackalope.inventory.view.ProductViewController;
 /*
@@ -25,14 +26,11 @@ public class Main extends Application
 	
 	private Stage primaryStage;
 	private BorderPane rootLayout;
-	private ObservableList<Product> productData = FXCollections.observableArrayList();
+	private Inventory inventory;
 	
 	public Main()
 	{
-		productData.add(new Product("Toyota Corolla",25000.00,3));
-		productData.add(new Product("Toyota 86",30000.00, 5));
-		productData.add(new Product("Ford CMax", 27500.00,1));
-		productData.add(new Product("Toyota Yaris",20000.00,2));
+		inventory = new Inventory();
 	}
 	
 	public static void main(String[] args) 
@@ -47,12 +45,11 @@ public class Main extends Application
 		this.primaryStage.setTitle("Inventory Management Demo");
 		
 		initialiseRootLayout();
-		showInventoryView();
+		showProductView();
 		
 	}
 	
-	
-	private void showInventoryView() 
+	private void showProductView() 
 	{
 		try
 		{
@@ -62,8 +59,8 @@ public class Main extends Application
 			
 			rootLayout.setCenter(pane);
 			
-			ProductViewController controller = loader.getController();
-			controller.setMain(this);
+			ProductViewController productViewController = loader.getController();
+			productViewController.setInventory(inventory);
 			
 		}catch(IOException exc)
 		{
@@ -88,10 +85,4 @@ public class Main extends Application
 			exc.printStackTrace();
 		}
 	}
-
-	public ObservableList<Product> getProductData() 
-	{
-		return productData ;
-	}
-
 }
