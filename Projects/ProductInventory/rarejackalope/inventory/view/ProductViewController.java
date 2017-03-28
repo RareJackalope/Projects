@@ -9,13 +9,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import rarejackalope.inventory.Main;
+import rarejackalope.inventory.ProductUtil;
 import rarejackalope.inventory.model.Product;
 
 public class ProductViewController 
 {
 	@FXML private TableView<Product> productTable;
 	@FXML private TableColumn<Product, String> productNameColumn;
-	@FXML private TableColumn<Product, Boolean> productAvaliabilityColumn;
+	@FXML private TableColumn<Product, String> productAvaliabilityColumn;
 	@FXML private Label productNameLabel;
 	@FXML private Label pricePerUnitLabel;
 	@FXML private Label productIdLabel;
@@ -29,7 +30,7 @@ public class ProductViewController
 	public void initialize()
 	{
 		productNameColumn.setCellValueFactory(cellData -> cellData.getValue().productName());
-		productAvaliabilityColumn.setCellValueFactory(cellData -> cellData.getValue().productInStock().asObject());
+		productAvaliabilityColumn.setCellValueFactory(cellData -> ProductUtil.booleanToYesOrNoStringProperty(cellData.getValue()));
 		
 		showProductDetails(null);
 		
