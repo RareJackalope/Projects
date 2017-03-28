@@ -8,36 +8,37 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import rarejackalope.inventory.ProductUtil;
 
 public class Product 
 {
 	private final StringProperty productName;
 	private final DoubleProperty pricePerProduct;
-	private final IntegerProperty productStockAmount;
+	private IntegerProperty productStockAmount;
 	private final IntegerProperty productId;
-	private final BooleanProperty productInStock;
+	private BooleanProperty productInStock;
+	public static int ID = 0;
 	
-	public Product(StringProperty productName, DoubleProperty pricePerProduct, IntegerProperty productStockAmount,
-			IntegerProperty productId, BooleanProperty productInStock) 
+	private Product(StringProperty productName, DoubleProperty pricePerProduct, IntegerProperty productStockAmount,
+			IntegerProperty productId) 
 	{
 		super();
 		this.productName = productName;
 		this.pricePerProduct = pricePerProduct;
 		this.productStockAmount = productStockAmount;
 		this.productId = productId;
-		this.productInStock = productInStock;
+		this.productInStock = new SimpleBooleanProperty(ProductUtil.isProductInStock(this));
 	}
 	
 	public Product(String productName, Double pricePerProduct, Integer productStockAmount)
 	{
 		this.productName = new SimpleStringProperty(productName);
 		this.pricePerProduct = new SimpleDoubleProperty(pricePerProduct);
-		//Dummy data.
-		this.productStockAmount = new SimpleIntegerProperty(1);
-		this.productId = new SimpleIntegerProperty(12345);
-		this.productInStock = new SimpleBooleanProperty(true);
+		this.productStockAmount = new SimpleIntegerProperty(productStockAmount);
+		this.productId = new SimpleIntegerProperty(ProductUtil.getId(this));
+		this.productInStock = new SimpleBooleanProperty(ProductUtil.isProductInStock(this));
 	}
-	
+
 	public Product()
 	{
 		this(null,null,null);
