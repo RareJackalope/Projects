@@ -2,6 +2,7 @@ package rarejackalope.inventory.view;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.Locale;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -20,6 +21,7 @@ public class ProductViewController
 	@FXML private Label productIdLabel;
 	@FXML private Label unitsAvaliableLabel;
 	@FXML private Label currentStockValueLabel;
+	@FXML private Label mainProductTitleLabel;
 	
 	private Main main;
 	
@@ -34,16 +36,17 @@ public class ProductViewController
 		productTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showProductDetails(newValue));
 		
 	}
-
+	
 	private void showProductDetails(Product product) 
 	{
 		if(product != null)
 		{
 			productNameLabel.setText(product.getProductName());
-			pricePerUnitLabel.setText(Double.toString(product.getPricePerProduct()));
+			pricePerUnitLabel.setText(localeCurrency(Double.toString(product.getPricePerProduct())));
 			productIdLabel.setText(Integer.toString(product.getProductId()));
 			unitsAvaliableLabel.setText(Integer.toString(product.getProductStockAmount()));
-			currentStockValueLabel.setText(totalProductValue(product.getPricePerProduct(), product.getProductStockAmount()));
+			currentStockValueLabel.setText(localeCurrency(totalProductValue(product.getPricePerProduct(), product.getProductStockAmount())));
+			mainProductTitleLabel.setText(product.getProductName());
 		}
 		else
 		{
@@ -53,7 +56,15 @@ public class ProductViewController
 			unitsAvaliableLabel.setText("");
 			unitsAvaliableLabel.setText("");
 			currentStockValueLabel.setText("");
+			mainProductTitleLabel.setText("");
 		}
+	}
+
+	private String localeCurrency(String currencyValue) 
+	{	
+
+		NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.CANADA);	
+		return formatter.format(Float.parseFloat(currencyValue));
 	}
 
 	private String totalProductValue(double pricePerProduct, int productStockAmount) 
