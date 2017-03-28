@@ -2,12 +2,17 @@ package rarejackalope.inventory;
 
 import java.io.IOException;
 
+
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import rarejackalope.inventory.model.Product;
+import rarejackalope.inventory.view.ProductViewController;
 /*
  *Brief
  *Product Inventory Project - Create an application which manages an inventory of products. 
@@ -20,6 +25,15 @@ public class Main extends Application
 	
 	private Stage primaryStage;
 	private BorderPane rootLayout;
+	private ObservableList<Product> productData = FXCollections.observableArrayList();
+	
+	public Main()
+	{
+		productData.add(new Product("Toyota Corolla",25000.00,3));
+		productData.add(new Product("Toyota 86",30000.00, 5));
+		productData.add(new Product("Ford CMax", 27500.00,1));
+		productData.add(new Product("Toyota Yaris",20000.00,2));
+	}
 	
 	public static void main(String[] args) 
 	{
@@ -34,6 +48,7 @@ public class Main extends Application
 		
 		initialiseRootLayout();
 		showInventoryView();
+		
 	}
 	
 	
@@ -46,6 +61,9 @@ public class Main extends Application
 			AnchorPane pane = (AnchorPane) loader.load();
 			
 			rootLayout.setCenter(pane);
+			
+			ProductViewController controller = loader.getController();
+			controller.setMain(this);
 			
 		}catch(IOException exc)
 		{
@@ -69,6 +87,11 @@ public class Main extends Application
 		{
 			exc.printStackTrace();
 		}
+	}
+
+	public ObservableList<Product> getProductData() 
+	{
+		return productData ;
 	}
 
 }
