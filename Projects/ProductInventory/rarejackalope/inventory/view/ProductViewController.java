@@ -10,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import rarejackalope.inventory.Main;
 import rarejackalope.inventory.ProductUtil;
+import rarejackalope.inventory.model.Inventory;
 import rarejackalope.inventory.model.Product;
 
 public class ProductViewController 
@@ -23,8 +24,9 @@ public class ProductViewController
 	@FXML private Label unitsAvaliableLabel;
 	@FXML private Label currentStockValueLabel;
 	@FXML private Label mainProductTitleLabel;
+	@FXML private Label totalProductValue;
 	
-	private Main main;
+	private Inventory inventory;
 	
 	@FXML
 	public void initialize()
@@ -48,6 +50,7 @@ public class ProductViewController
 			unitsAvaliableLabel.setText(Integer.toString(product.getProductStockAmount()));
 			currentStockValueLabel.setText(localeCurrency(totalProductValue(product.getPricePerProduct(), product.getProductStockAmount())));
 			mainProductTitleLabel.setText(product.getProductName());
+			totalProductValue.setText(inventory.getInventoryValue());
 		}
 		else
 		{
@@ -74,9 +77,9 @@ public class ProductViewController
 		return formatter.format(pricePerProduct * productStockAmount);
 	}
 	
-	public void setMain(Main main)
+	public void setInventory(Inventory inventory) 
 	{
-		this.main = main;
-		productTable.setItems(main.getProductData());
+		this.inventory = inventory;
+		productTable.setItems(inventory.getProductData());
 	}
 }

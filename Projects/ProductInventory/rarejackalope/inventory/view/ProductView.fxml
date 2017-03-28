@@ -75,7 +75,7 @@
           <AnchorPane minHeight="30.0" minWidth="25.0" prefHeight="100.0" prefWidth="160.0">
                <children>
                   <Label layoutX="14.0" layoutY="9.0" text="Current Stock Value" />
-                  <Label layoutX="134.0" layoutY="9.0" text="Label" />
+                  <Label fx:id="totalProductValue" layoutX="134.0" layoutY="9.0" text="Label" />
                </children>
             </AnchorPane>
         </items>
