@@ -118,7 +118,4 @@ public class Product
 	{
 		this.productInStock.set(productInStock);
 	}
-	
-	
-	
 }

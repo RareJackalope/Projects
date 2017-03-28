@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 /*
@@ -32,9 +33,26 @@ public class Main extends Application
 		this.primaryStage.setTitle("Inventory Management Demo");
 		
 		initialiseRootLayout();
+		showInventoryView();
 	}
 	
 	
+	private void showInventoryView() 
+	{
+		try
+		{
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource("view/ProductView.fxml"));
+			AnchorPane pane = (AnchorPane) loader.load();
+			
+			rootLayout.setCenter(pane);
+			
+		}catch(IOException exc)
+		{
+			exc.printStackTrace();
+		}
+	}
+
 	private void initialiseRootLayout() 
 	{
 		try
